@@ -21,7 +21,7 @@ This section documents the creation and validation of the serverless PostgreSQL 
 
 **2. Database Schema Creation (DDL)** *Brief: Execution of the DDL statements in the Neon SQL Editor to construct the core relational tables (`drivers` and `races`).* ![Table Creation Logic](Neon_Pipeline/neon_table_creation.png.png)
 
-**3. Relational Data Verification** *Brief: Validating the relational database environment by displaying the structured driver schema and verifying the successful load of 861 rows.* ![Driver Data View](Neon_Pipeline/neon_data_populated.png.jpg)  
+**3. Relational Data Verification** *Brief: Validating the relational database environment by displaying the structured driver schema and verifying the successful load of 861 rows.* ![Driver Data View](Neon_Pipeline/neon_data_populated.png.png)  
 ![Row Count Validation](Neon_Pipeline/neon_row_count.png.png)
 
 ## Complete Architecture Breakdown
