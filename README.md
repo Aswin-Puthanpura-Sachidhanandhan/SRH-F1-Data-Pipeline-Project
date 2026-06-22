@@ -132,6 +132,8 @@ This project fulfills the Data Engineering final project requirements. The objec
       • Refresh Gold Tables
       • Update Dashboards
 ```
+![Constructor Performance Dashboard](Snowflake_Pipeline/Screenshot%202026-06-22%20234734.png)
+
 
 
 *For detailed technical evidence, including automated ingestion proofs, SQL logic, DDL statements, and pipeline extraction scripts, please navigate to the respective `Snowflake_Pipeline` and `Neon_Pipeline` directories.*
