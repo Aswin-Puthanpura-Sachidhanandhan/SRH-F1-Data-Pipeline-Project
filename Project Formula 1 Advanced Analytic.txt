@@ -1,0 +1,22 @@
+Project: Formula 1 Advanced Analytics Pipeline & Dashboard
+Prompt History Log
+
+1. How can I set up a GitHub Actions workflow using Python to extract F1 dataset tables from a Neon PostgreSQL database and upload them as CSV files to an AWS S3 bucket on a scheduled basis?
+
+2. What is the correct SQL syntax in Snowflake to create an external stage that connects securely to my AWS S3 bucket holding the raw F1 data?
+
+3. I am setting up the ingestion layer. Can you explain how to write the COPY INTO command to load data from my S3 stage into my f1_drivers table, specifically ensuring it skips the header row?
+
+4. I need to ensure my Streamlit dashboard always shows the latest data without duplicating rows. How do I configure my Snowflake load command to truncate the target table before loading the new CSV file?
+
+5. I'm navigating the new Snowflake Snowsight UI. How do I switch my active workspace context to the DATA_PIPELINE schema to verify my table structures?
+
+6. I need to write a Python script in Google Colab to manually extract a specific table from Neon DB using SQLAlchemy and download it as a CSV. Can you provide the boilerplate code for this?
+
+7. When manually uploading a CSV file through the Snowflake UI to update my f1_drivers table, what file format settings should I apply to prevent data type mismatch errors with the header row?
+
+8. I am building a Streamlit dashboard directly inside Snowflake. What is the best practice for querying the f1_constructors and f1_pit_stops tables to visualize Total Points and Average Pit Stop Duration?
+
+9. My Streamlit bar charts are currently rendering empty because the underlying f1_constructors table was accidentally truncated. What is the fastest way to re-execute the COPY INTO command from my existing S3 stage to restore the data?
+
+10. After successfully reloading the backend tables in Snowflake, how do I force the Streamlit application to refresh its cache and re-render the visualizations with the updated data?
