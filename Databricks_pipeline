@@ -1,0 +1,128 @@
+Data Engineering Pipeline using Databricks, AWS S3, Neon PostgreSQL
+DATABRICKS SETUP:
+This section shows the initial Databricks workspace setup, catalog configuration, and project environment preparation.
+ 
+It documents a key step in the implementation process and provides evidence of the successful configuration, execution, or validation performed during this stage.
+SCHEMA CREATION:
+These notebook screenshots demonstrate the creation of database schemas, catalogs, and foundational tables required for the project.
+ 
+It documents a key step in the implementation process and provides evidence of the successful configuration, execution, or validation performed during this stage.
+
+CONNECTION OF NEON TO DATABRICKS:
+ 
+
+These screenshots show how Neon PostgreSQL was connected to Databricks and validated before data ingestion.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CONNECTION OF AWS S3 TO DATABRICKS:
+   
+These screenshots shows how AWS S3 is connected to Databricks using the Data ingestion feature available in Databricks.
+
+
+
+
+
+
+
+
+CREATION OF BROZE LAYER:
+   
+This notebook reads data from the Neon PostgreSQL database and AWS S3 using Spark JDBC connectivity and loads it into the Bronze layer.
+CREATION OF SILVER LAYER:
+  
+This notebook reads data from the Neon PostgreSQL database and AWS S3 using Spark JDBC connectivity and loads it into the Silver layer. The Silver Layer cleans and transforms the Bronze Layer data to create driver pitstop analysis and constructor performance datasets for analytical reporting
+
+
+
+
+
+
+
+
+CREATION OF GOLD LAYER:
+ 
+The Gold Layer creates dashboard-ready datasets by aggregating and analyzing the transformed data from the Silver Layer.
+
+
+
+
+
+
+
+
+
+
+
+
+CREATING DASHBOARD:
+OBJECTIVE 1: TOP CONSTRUCTORS
+ 
+ 
+ 
+   
+ 
+The Top Constructors Performance Dashboard was created in Databricks by first developing SQL datasets from the curated Gold Layer table (gold.top_constructors_dashboard), which contains aggregated Formula One constructor performance metrics such as constructor rank, total points, and total wins. Separate SQL queries were created to retrieve the top constructors by total points, top constructors by total wins, the top five constructors for points distribution analysis, and a complete constructor ranking table. These datasets were then added to a new Databricks Dashboard as individual visualizations. A horizontal bar chart was used to display the Top Constructors by Total Points, a donut chart was created to show the Constructor Points Distribution among the top teams, another horizontal bar chart was used to visualize the Top Constructors by Total Wins, and a tabular widget was added to present detailed constructor rankings. During dashboard configuration, appropriate fields such as constructor_name, total_points, and total_wins were mapped to the chart axes and measures. After arranging the visualizations into an intuitive layout, the dashboard was published, enabling users to interactively analyze constructor performance. The dashboard ultimately provides a comprehensive view of Formula One constructor rankings, points accumulation, race victories, and overall team performance using data processed through the Bronze, Silver, and Gold layers of the Databricks Medallion Architecture.
+
+
+
+
+
+
+
+
+OBJECTIVE 2: DRIVER PERFORMANCE AND PIT STOP IMPACT
+    
+ The Driver Performance and Pit Stop Impact Dashboard was created in Databricks by first preparing multiple SQL datasets from the curated Gold Layer table (gold.driver_performance_dashboard), which contains aggregated driver performance metrics derived from the Bronze and Silver layers. Separate SQL queries were developed to support each visualization within the dashboard. The first dataset retrieves the top 10 drivers based on total championship points and is used to create a horizontal bar chart highlighting the highest-performing drivers. The second dataset identifies the drivers with the fastest average pit stop times by selecting and sorting drivers based on their average pit stop duration, which is then visualized using a bar chart. The third dataset retrieves average pit stop times and average finishing positions for all drivers, forming the basis of a scatter plot that helps analyze the relationship between pit stop performance and race results. Finally, a ranking dataset was created containing driver rank, driver name, constructor name, total points, average pit stop time, and average finishing position, which is displayed in a tabular format to provide detailed driver statistics.
+After creating and validating each SQL query, the datasets were added to a Databricks Dashboard and connected to appropriate visualizations. The fields from each dataset were mapped to chart axes, measures, and labels to ensure meaningful representation of the data. The visualizations were then arranged into a dashboard layout consisting of the Top 10 Drivers by Total Points chart, the Fastest Average Pit Stops chart, the Pit Stop Impact on Finish Position scatter plot, and the Driver Ranking Table. Once the dashboard design was finalized, it was published within Databricks, enabling interactive exploration of driver performance metrics. The dashboard provides valuable insights into driver rankings, championship points accumulation, pit stop efficiency, and the impact of pit stop performance on race finishing positions, supporting data-driven analysis of Formula One racing performance.
+
+
+JOB AUTOMATIN IN DATABRICKS:
+   
+These screenshots show the Databricks Job Scheduling and Automation process used to automate the execution of the F1 data pipeline. After the Bronze, Silver, and Gold layer notebooks were successfully developed and tested, a Databricks Job named F1 PIPELINE was created through the Jobs & Pipelines interface. Initially, a new job was configured by selecting the notebook task option and linking it to the pipeline notebook responsible for executing the complete ETL workflow. The job was configured to run on a Serverless Compute environment, eliminating the need for manual cluster management and ensuring efficient execution of the data pipeline.
+Once the job was created, a schedule was configured using the Schedules & Triggers settings. The trigger type was set to Scheduled, and an interval-based schedule was defined to automatically execute the pipeline every 2 hours. This configuration enables Databricks to continuously monitor and process newly available data from both Amazon S3 and Neon PostgreSQL without requiring manual intervention. After the schedule was activated, the job execution history became available in the Runs section, where each execution can be monitored along with its status, duration, start time, and completion details.
+The final job workflow contains the main F1_pipeline task, which automatically executes the ETL process and refreshes the Gold Layer datasets. Once the pipeline completes successfully, the downstream dashboards, including Driver Performance and Pit Stop Impact and Top Constructors Performance, are refreshed with the latest processed data. This automated scheduling mechanism ensures that any new records added to the source systems are regularly ingested, transformed, and made available for analytical reporting, thereby enabling near real-time business intelligence and performance monitoring within Databricks.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TESTING WITH NEW DATAS:  
+ 
+  
+ These screenshots demonstrate the end-to-end data validation and dashboard refresh process implemented in the Formula One analytics project. To verify that the automated ETL pipeline correctly processes newly arriving data, new records were manually inserted into both source systems. In the Neon PostgreSQL database, a new driver record was added with a unique driverId (99999), along with associated driver details such as name, nationality, date of birth, and reference information. Simultaneously, new records were appended to the source CSV files stored in Amazon S3, including results.csv, pit_stops.csv, and constructors.csv. These records were intentionally assigned high values for points and performance metrics to make their impact easily visible in downstream analytics and dashboard visualizations.
+After the new source records were added, the Databricks job scheduler automatically executed the Bronze, Silver, and Gold layer transformations according to the configured schedule. The Bronze layer ingested the updated data from Neon and Amazon S3, the Silver layer performed cleansing and standardization of the records, and the Gold layer generated business-ready analytical datasets. Once processing was completed, the dashboards were automatically refreshed using the updated Gold Layer tables.
+The validation was confirmed through the Driver Performance and Pit Stop Impact Dashboard, where the newly added driver “MA AM” appeared among the top-ranked drivers due to the large points value inserted into the source data. The driver also appeared in the ranking table with the associated constructor information and performance metrics, demonstrating that data added to both Neon PostgreSQL and Amazon S3 successfully propagated through the entire ETL pipeline. This verification process confirms that the implemented architecture supports automated data ingestion, transformation, and dashboard refreshes, ensuring that newly arriving records are accurately reflected in analytical reports without manual intervention.
+
+
+SUMMARY :
+This project implements an end-to-end Formula One Data Engineering and Analytics Pipeline using the Medallion Architecture (Bronze, Silver, and Gold layers) on Databricks. The objective of the project is to ingest data from multiple sources, transform it into business-ready datasets, and generate interactive dashboards for performance analysis.
+The pipeline integrates data from Amazon S3 and Neon PostgreSQL, where raw Formula One datasets such as drivers, constructors, race results, races, and pit stop information are stored. Databricks is used as the central processing platform to ingest the data into the Bronze Layer, preserving the raw source records. The data is then cleaned, standardized, and validated in the Silver Layer to improve data quality and consistency. Finally, the Gold Layer combines and aggregates the transformed datasets to create analytical tables optimized for reporting and business intelligence.
+Using the Gold Layer datasets, interactive dashboards were developed in Databricks to analyze driver performance, pit stop efficiency, and constructor performance. The dashboards provide insights such as top drivers by championship points, fastest average pit stops, pit stop impact on finishing position, constructor rankings, total wins, and points distribution. These visualizations enable users to explore Formula One performance metrics through an intuitive and interactive interface.
+To ensure continuous data availability, the entire ETL workflow was automated using Databricks Jobs and Scheduling, with the pipeline configured to execute every two hours. New records added to Amazon S3 and Neon PostgreSQL are automatically detected, processed through the Bronze, Silver, and Gold layers, and reflected in the dashboards without manual intervention. Validation testing was performed by inserting new driver, constructor, race result, and pit stop records, confirming that the pipeline successfully updates analytical outputs and dashboard visualizations.
+Overall, the project demonstrates the implementation of a modern cloud-based data engineering solution that combines data ingestion, transformation, automation, and visualization to deliver real-time analytical insights for Formula One racing data.
+
+
+
