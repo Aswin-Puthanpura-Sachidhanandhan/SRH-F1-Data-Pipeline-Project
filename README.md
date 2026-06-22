@@ -14,6 +14,29 @@ This section documents the streaming data pipeline utilizing Snowpipe to automat
 
 **3. Snowflake Pipeline SQL Logic** *Brief: Demonstrates the CREATE TABLE and data ingestion logic executed in Snowflake to maintain the F1 dataset.* ![SQL Pipeline Logic](Snowflake_Pipeline/pipeline_sql.jpg.png)
 
+### 🚀 Proof of Automated Data Ingestion
+To verify the continuous streaming architecture, test data is being staged to drop directly into the AWS S3 bucket. Snowpipe is configured to detect the S3 event notification and automatically ingest the files into Snowflake, instantly updating the Streamlit dashboard without any manual SQL execution.
+
+#### Constructor Performance Injection
+*Baseline points recorded prior to the automated S3 data drop.*
+
+**Before S3 Upload:**
+![Before Constructor](Snowflake_Pipeline/before_constructor.png)
+
+**After Automated Snowpipe Ingestion:**
+*[Pending live S3 data injection...]*
+
+---
+
+#### Pit Stop Impact Injection
+*Baseline historical averages recorded prior to the automated S3 data drop.*
+
+**Before S3 Upload:**
+![Before Pitstop](Snowflake_Pipeline/before_pitstop.png)
+
+**After Automated Snowpipe Ingestion:**
+*[Pending live S3 data injection...]*
+
 ### Pipeline 2: Neon PostgreSQL Relational Database Setup
 This section documents the creation and validation of the serverless PostgreSQL environment used as the relational source for the hybrid architecture.
 
