@@ -22,5 +22,5 @@ To verify the continuous streaming architecture, test data is staged to drop dir
 **Before S3 Upload:**
 ![Before Pitstop](before_pitstop.png.png)
 
-**After Automated Snowpipe Ingestion:**
-*[Pending live S3 data injection...]*
+**After Automated Snowpipe Ingestion:*
+![After Pitstop](After_pitstop.png)
