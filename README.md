@@ -21,7 +21,7 @@ To verify the continuous streaming architecture, test data is being staged to dr
 *Baseline points recorded prior to the automated S3 data drop.*
 
 **Before S3 Upload:**
-![Before Constructor](Snowflake_Pipeline/before_constructor.png)
+![Before Constructor](Snowflake_Pipeline/before_constructor.png.png)
 
 **After Automated Snowpipe Ingestion:**
 *[Pending live S3 data injection...]*
@@ -32,7 +32,7 @@ To verify the continuous streaming architecture, test data is being staged to dr
 *Baseline historical averages recorded prior to the automated S3 data drop.*
 
 **Before S3 Upload:**
-![Before Pitstop](Snowflake_Pipeline/before_pitstop.png)
+![Before Pitstop](Snowflake_Pipeline/before_pitstop.png.png)
 
 **After Automated Snowpipe Ingestion:**
 *[Pending live S3 data injection...]*
