@@ -132,7 +132,11 @@ This project fulfills the Data Engineering final project requirements. The objec
       • Refresh Gold Tables
       • Update Dashboards
 ```
+
+##TOP CONSTRUCTORS PERFORMANCE
 ![Constructor Performance Dashboard](Snowflake_Pipeline/Screenshot%202026-06-22%20234734.png)
+##DRIVER PERFORMANCE AND PIT STOP IMPACT
+![Driver Performance Dashboard](Snowflake_Pipeline/Screenshot%202026-06-22%20234839.png)
 
 
 
